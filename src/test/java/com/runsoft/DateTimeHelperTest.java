@@ -12,7 +12,7 @@ import java.util.Date;
 * DateTimeHelper Tester. 
 * 
 * @author <Authors name> 
-* @since <pre>11/28/2019</pre> 
+* @since <pre>11/28/2019</pre>
 * @version 1.0 
 */
 
@@ -26,8 +26,14 @@ public void before() throws Exception {
 
 @After
 public void after() throws Exception { 
-} 
+}
 
+    private static DateTimeHelper FHelper;
+
+    static {
+        DateTimeHelper.ConfigHelper(new DateTimeForChina());
+        FHelper = new DateTimeHelper(new DateTimeFormatConfig() {});
+    }
 /**
 *
 * Method: ConfigHelper(DateTimeFormatConfig nConfig)
@@ -36,8 +42,7 @@ public void after() throws Exception {
 @Test
 public void testConfigHelper() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper.ConfigHelper(new DateTimeForChina());
-    System.out.print("ConfigHelper: Init Done");
+    System.out.println("ConfigHelper: Init Done");
 }
 
 /** 
@@ -48,9 +53,8 @@ public void testConfigHelper() throws Exception {
 @Test
 public void testStrToDate() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig() {});
-    Date nDate = nHelper.Str2Date("2019-11-28");
-    System.out.print("StrToDate: " + nHelper.Date2Str(nDate, true));
+    Date nDate = FHelper.Str2Date("2019-11-28");
+    System.out.println("StrToDate: " + FHelper.Date2Str(nDate, true));
 }
 
 /**
@@ -62,7 +66,7 @@ public void testStrToDate() throws Exception {
 public void testStr2Date() throws Exception { 
 //TODO: Test goes here...
     Date nDate = DateTimeHelper.Str2Date("2019-11-28");
-    System.out.print("Str2Date: " + DateTimeHelper.Date2Str(nDate, true));
+    System.out.println("Str2Date: " + DateTimeHelper.Date2Str(nDate, true));
 } 
 
 /** 
@@ -74,7 +78,7 @@ public void testStr2Date() throws Exception {
 public void testStr2Time() throws Exception { 
 //TODO: Test goes here...
     Date nTime = DateTimeHelper.Str2Time("15:20:20");
-    System.out.print("Str2Time: " + DateTimeHelper.Time2Str(nTime, true));
+    System.out.println("Str2Time: " + DateTimeHelper.Time2Str(nTime, true));
 } 
 
 /**
@@ -85,8 +89,7 @@ public void testStr2Time() throws Exception {
 @Test
 public void testDateToStr() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig(){});
-    System.out.print("DateToStr: " + nHelper.DateToStr(new Date(), true));
+    System.out.println("DateToStr: " + FHelper.DateToStr(new Date(), true));
 }
 
 /** 
@@ -97,7 +100,7 @@ public void testDateToStr() throws Exception {
 @Test
 public void testDate2Str() throws Exception { 
 //TODO: Test goes here...
-    System.out.print("Date2Str: " + DateTimeHelper.Date2Str(new Date(), true));
+    System.out.println("Date2Str: " + DateTimeHelper.Date2Str(new Date(), true));
 } 
 
 /**
@@ -108,8 +111,7 @@ public void testDate2Str() throws Exception {
 @Test
 public void testTimeToStr() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig(){});
-    System.out.print("TimeToStr: " + nHelper.TimeToStr(new Date(), true));
+    System.out.println("TimeToStr: " + FHelper.TimeToStr(new Date(), true));
 }
 
 /**
@@ -120,7 +122,7 @@ public void testTimeToStr() throws Exception {
 @Test
 public void testTime2Str() throws Exception { 
 //TODO: Test goes here...
-    System.out.print("Time2Str: " + DateTimeHelper.Time2Str(new Date(), true));
+    System.out.println("Time2Str: " + DateTimeHelper.Time2Str(new Date(), true));
 } 
 
 /**
@@ -131,14 +133,14 @@ public void testTime2Str() throws Exception {
 @Test
 public void testStrToDateTime() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig(){
+    DateTimeHelper FHelper = new DateTimeHelper(new DateTimeFormatConfig(){
         @Override
         public String forDateTime() {
             return "yyyyMMdd HH:mm:ss";
         }
     });
-    Date nDate = nHelper.StrToDateTime("20191129 15:20:20");
-    System.out.print("StrToDateTime: " + nHelper.DateTimeToStr(nDate));
+    Date nDate = FHelper.StrToDateTime("20191129 15:20:20");
+    System.out.println("StrToDateTime: " + FHelper.DateTimeToStr(nDate));
 }
 
 /**
@@ -150,7 +152,7 @@ public void testStrToDateTime() throws Exception {
 public void testStr2DateTime() throws Exception {
 //TODO: Test goes here...
     Date nDate = DateTimeHelper.Str2DateTime("2019-11-29 15:20:20");
-    System.out.print("Str2DateTime: " + DateTimeHelper.DateTime2Str(nDate));
+    System.out.println("Str2DateTime: " + DateTimeHelper.DateTime2Str(nDate));
 }
 
 /**
@@ -181,8 +183,7 @@ public void testDateTime2Str() throws Exception {
 @Test
 public void testDateToWeek() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig() { });
-    System.out.print("DateToWeek: " + nHelper.DateToWeek(new Date(), false));
+    System.out.println("DateToWeek: " + FHelper.DateToWeek(new Date(), false));
 }
 
 /**
@@ -193,7 +194,7 @@ public void testDateToWeek() throws Exception {
 @Test
 public void testDate2Week() throws Exception {
 //TODO: Test goes here...
-    System.out.print("Date2Week: " + DateTimeHelper.Date2Week(new Date(), false));
+    System.out.println("Date2Week: " + DateTimeHelper.Date2Week(new Date(), false));
 }
 
 /**
@@ -204,8 +205,7 @@ public void testDate2Week() throws Exception {
 @Test
 public void testDateToCH() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig() { });
-    System.out.print("DateToCH: " + nHelper.DateToCH(new Date()));
+    System.out.println("DateToCH: " + FHelper.DateToCH(new Date()));
 }
 
 /**
@@ -216,7 +216,7 @@ public void testDateToCH() throws Exception {
 @Test
 public void testDate2CH() throws Exception {
 //TODO: Test goes here...
-    System.out.print("Date2CH: " + DateTimeHelper.Date2CH(new Date()));
+    System.out.println("Date2CH: " + DateTimeHelper.Date2CH(new Date()));
 }
 
 /**
@@ -227,8 +227,7 @@ public void testDate2CH() throws Exception {
 @Test
 public void testTimeToCH() throws Exception {
 //TODO: Test goes here...
-    DateTimeHelper nHelper = new DateTimeHelper(new DateTimeFormatConfig() { });
-    System.out.print("TimeToCH: " + nHelper.TimeToCH(new Date()));
+    System.out.println("TimeToCH: " + FHelper.TimeToCH(new Date()));
 }
 
 /**
@@ -239,8 +238,118 @@ public void testTimeToCH() throws Exception {
 @Test
 public void testTime2CH() throws Exception {
 //TODO: Test goes here...
-    System.out.print("Time2CH: " + DateTimeHelper.Time2CH(new Date()));
+    System.out.println("Time2CH: " + DateTimeHelper.Time2CH(new Date()));
 }
 
+/**
+*
+* Method: GetDateTimeSerial(String nPrefix)
+*
+*/
+@Test
+public void testDayStart() throws Exception {
+//TODO: Test goes here...
+    DateTimeHelper FHelper = new DateTimeHelper(new DateTimeFormatConfig(){
+        @Override
+        public String forDateTime() {
+            return "yyyy-MM-dd HH:mm:ss:SSS";
+        }
+    });
+    System.out.println("DayStart: " + FHelper.DateTimeToStr(FHelper.DayStart("2019-12-01")));
+}
+
+/**
+*
+* Method: GetDayStart(String nStr)
+*
+*/
+@Test
+public void testGetDayStart() throws Exception {
+//TODO: Test goes here...
+    System.out.println("GetDayStart: " + DateTimeHelper.DateTime2Str(DateTimeHelper.GetDayStart("2019-12-01")));
+}
+
+/**
+*
+* Method: DayEnd(String nStr)
+*
+*/
+@Test
+public void testDayEnd() throws Exception {
+//TODO: Test goes here...
+    DateTimeHelper FHelper = new DateTimeHelper(new DateTimeFormatConfig(){
+        @Override
+        public String forDateTime() {
+            return "yyyy-MM-dd HH:mm:ss:SSS";
+        }
+    });
+    System.out.println("DayEnd: " + FHelper.DateTimeToStr(FHelper.DayEnd("2019-12-01")));
+}
+
+/**
+*
+* Method: GetDayEnd(String nStr)
+*
+*/
+@Test
+public void testGetDayEnd() throws Exception {
+//TODO: Test goes here...
+    System.out.println("GetDayEnd: " + DateTimeHelper.DateTime2Str(DateTimeHelper.GetDayEnd("2019-12-01")));
+}
+
+/**
+*
+* Method: DateTimeSerial(String nPrefix)
+*
+*/
+@Test
+public void testDateTimeSerial() throws Exception {
+//TODO: Test goes here...
+}
+
+/**
+*
+* Method: GetTickCount()
+*
+*/
+@Test
+public void testGetTickCount() throws Exception {
+//TODO: Test goes here...
+    System.out.println("GetTickCount: " + DateTimeHelper.GetTickCount());
+}
+
+/**
+*
+* Method: TickCount()
+*
+*/
+@Test
+public void testTickCount() throws Exception {
+//TODO: Test goes here...
+    System.out.println("TickCount: " + FHelper.TickCount());
+}
+
+/**
+*
+* Method: TickCountDiff(Long nBegin)
+*
+*/
+@Test
+public void testTickCountDiff() throws Exception {
+//TODO: Test goes here...
+        System.out.println("TickCountDiff: " + FHelper.TickCountDiff(System.nanoTime()));
+    }
+
+
+/**
+*
+* Method: GetTickCountDiff(Long nBegin)
+*
+*/
+@Test
+public void testGetTickCountDiff() throws Exception {
+//TODO: Test goes here...
+    System.out.println("GetTickCountDiff: " + DateTimeHelper.GetTickCountDiff(System.nanoTime()));
+}
 
 }

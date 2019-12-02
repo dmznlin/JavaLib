@@ -249,4 +249,101 @@ public class DateTimeHelper {
     public static String Time2CH(Date nTime){
         return FHelper.TimeToCH(nTime);
     }
+
+    /**
+     * 计算某天的开始
+     * @param nStr 日期格式字符串(如yyyy-MM-dd)
+     * @return 返回指定日期 + 零点时间
+     */
+    public Date DayStart(String nStr){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(FConfig.forDate());
+        LocalDateTime dt = LocalDate.parse(nStr, df).atTime(LocalTime.MIN);
+        return Date.from(dt.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Date GetDayStart(String nStr){
+        return FHelper.DayStart(nStr);
+    }
+
+    /**
+     * 计算某天的结束
+     * @param nStr 日期格式字符串(如yyyy-MM-dd)
+     * @return 返回指定日期 + 午夜零点时间
+     */
+    public Date DayEnd(String nStr){
+        DateTimeFormatter df = DateTimeFormatter.ofPattern(FConfig.forDate());
+        LocalDateTime dt = LocalDate.parse(nStr, df).atTime(LocalTime.MAX);
+        return Date.from(dt.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public static Date GetDayEnd(String nStr){
+        return FHelper.DayEnd(nStr);
+    }
+
+    /**
+     * 基于日期 + 时间生成序列号
+     * @param nPrefix 前缀
+     * @return
+     */
+    public String DateTimeSerial(String nPrefix){
+        try {
+            Thread.sleep(1);
+            //等待,避免重复
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        return nPrefix + LocalDateTime.now().format(df);
+    }
+
+    public static String GetDateTimeSerial(String nPrefix){
+        return FHelper.DateTimeSerial(nPrefix);
+    }
+
+    /**
+     * 获取精确计时
+     * @return
+     */
+    public Long TickCount(){
+        return System.nanoTime();
+    }
+
+    public static Long GetTickCount(){
+        return FHelper.TickCount();
+    }
+
+    /**
+     * 取得计时间隔(以纳秒为单位)
+     * @param nBegin 开始计时,由System.nanoTime()产生
+     * @return
+     */
+    public Long TickCountDiff(Long nBegin) {
+        Long nEnd = System.nanoTime();
+        Long nDiff;
+
+        if (nBegin>=0 && nEnd >=0){//正常情况
+            nDiff = nEnd - nBegin;
+        } else if (nBegin<0 && nEnd<0){//双溢出
+            nDiff = nEnd - nBegin;
+        } else if (nBegin<0 && nEnd>0){//开始溢出
+            nDiff = nEnd - nBegin;
+            if (nDiff < 0){//计算溢出
+                nDiff = Long.MAX_VALUE;
+            }
+        } else if (nBegin>0 && nEnd<0){//结束溢出
+            nDiff = (nEnd - Long.MIN_VALUE) + (Long.MAX_VALUE - nBegin);
+            if (nDiff < 0){
+                nDiff = Long.MAX_VALUE;
+            }
+        } else {
+            nDiff = Long.MAX_VALUE;
+        }
+
+        return nDiff;
+    }
+
+    public static Long GetTickCountDiff(Long nBegin){
+        return FHelper.TickCountDiff(nBegin);
+    }
 }
