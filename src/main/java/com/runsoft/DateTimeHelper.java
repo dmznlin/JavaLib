@@ -313,14 +313,29 @@ public class DateTimeHelper {
         return FHelper.TickCount();
     }
 
+    enum TickDefault{
+        tdZero,  //开始计时为0时,返回0
+        tdNow   //开始计时为0时,返回当前计时
+    }
+
     /**
      * 取得计时间隔(以纳秒为单位)
      * @param nBegin 开始计时,由System.nanoTime()产生
+     * @param nTick 开始计时为0时的默认值
      * @return
      */
-    public Long TickCountDiff(Long nBegin) {
+    public Long TickCountDiff(Long nBegin, TickDefault nTick) {
         Long nEnd = System.nanoTime();
-        Long nDiff;
+        Long nDiff = Long.valueOf("0");
+
+        if (nDiff.equals(nBegin)){
+            if (nTick == TickDefault.tdNow){
+                return nEnd;
+            }
+
+            return nDiff;
+            //返回0计时
+        }
 
         if (nBegin>=0 && nEnd >=0){//正常情况
             nDiff = nEnd - nBegin;
@@ -343,7 +358,7 @@ public class DateTimeHelper {
         return nDiff;
     }
 
-    public static Long GetTickCountDiff(Long nBegin){
-        return FHelper.TickCountDiff(nBegin);
+    public static Long GetTickCountDiff(Long nBegin, TickDefault nTick){
+        return FHelper.TickCountDiff(nBegin, nTick);
     }
 }

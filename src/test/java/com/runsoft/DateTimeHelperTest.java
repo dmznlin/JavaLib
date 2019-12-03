@@ -337,7 +337,7 @@ public void testTickCount() throws Exception {
 @Test
 public void testTickCountDiff() throws Exception {
 //TODO: Test goes here...
-        System.out.println("TickCountDiff: " + FHelper.TickCountDiff(System.nanoTime()));
+        System.out.println("TickCountDiff: " + FHelper.TickCountDiff(Long.valueOf(0), DateTimeHelper.TickDefault.tdNow));
     }
 
 
@@ -349,7 +349,7 @@ public void testTickCountDiff() throws Exception {
 @Test
 public void testGetTickCountDiff() throws Exception {
 //TODO: Test goes here...
-    System.out.println("GetTickCountDiff: " + DateTimeHelper.GetTickCountDiff(System.nanoTime()));
+    System.out.println("GetTickCountDiff: " + DateTimeHelper.GetTickCountDiff(System.nanoTime(), DateTimeHelper.TickDefault.tdNow));
 }
 
 }
