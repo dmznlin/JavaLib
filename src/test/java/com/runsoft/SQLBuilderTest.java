@@ -48,7 +48,7 @@ public void testNewBuilder() throws Exception {
 	System.out.println("Insert: " + builder.BuildInsert());
 
 	System.out.println("Update: " +
-			builder.BuildUpdate("U_Date <> #date# and U_Name=#name#", null));
+			builder.BuildUpdate("U_Date<>#name# and U_Name=#Name#", SF("name","dmzn")));
 }
 
 	/**
