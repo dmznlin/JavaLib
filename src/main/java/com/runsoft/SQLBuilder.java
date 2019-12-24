@@ -2,7 +2,7 @@ package com.runsoft;
 
 import java.util.*;
 
-public class SQLBuilder {
+public class SQLBuilder extends LibraryBase {
     public enum DatabaseType {
         dtDB2,
         dtMySQL,

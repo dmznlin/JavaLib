@@ -11,7 +11,7 @@ import org.dom4j.io.XMLWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class NativeXML {
+public class NativeXML extends LibraryBase {
     private String fileName = "";
     //已加载文件名
     private Document xmlDocument = null;

@@ -1,29 +1,65 @@
 package com.runsoft;
 
-public class LibHelper {
-	/**  基础库全局默认字符集 */
-	public static String DefaultCharsetName = "UTF-8";
-
+public class LibraryHelper extends LibraryBase {
 	/**
 	 * 转为16进制字符串
 	 * @param nData 字节数组
+	 * @param useblank 使用空格分隔
+	 * @param uppercase 大/小写模式
 	 * @return
 	 */
-	public static String ToHexString(byte[] nData){
+	public static String ToHexString(byte[] nData, boolean useblank, boolean uppercase){
 		if (nData == null || nData.length == 0){
 			return "";
 		}
 
 		StringBuilder buffer = new StringBuilder();
 		for (int i = 0; i < nData.length; i++) {
+			if (useblank && i > 0){ //补空格
+				buffer.append(" ");
+			}
+
 			int v = nData[i] & 0xFF;
 			if (v < 16) {
 				buffer.append(0);
 			}
-			buffer.append(Integer.toHexString(v));
+
+			if (uppercase){
+				buffer.append(Integer.toHexString(v).toUpperCase());
+			} else {
+				buffer.append(Integer.toHexString(v));
+			}
 		}
 
 		return buffer.toString();
+	}
+
+	/**
+	 * 转换字符串为16进制格式
+	 * @param nStr 待转换字符串
+	 * @param charsetname 字符集
+	 * @param useblank 使用空格分隔
+	 * @return
+	 */
+	public static String ToHexString(String nStr, String charsetname, boolean useblank){
+		String result;
+		try {
+			result = ToHexString(nStr.getBytes(charsetname), useblank, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "";
+		}
+
+		return result;
+	}
+
+	/**
+	 * 使用默认字符集转换字符串为16进制格式
+	 * @param nStr
+	 * @return
+	 */
+	public static String ToHexString(String nStr){
+		return ToHexString(nStr, DefaultCharsetName, true);
 	}
 
 	/**
@@ -31,9 +67,13 @@ public class LibHelper {
 	 * @param nHexString 16进制字符串
 	 * @return
 	 */
-	public static byte[] RestoreHex(String nHexString){
+	public static byte[] RestoreHexStr(String nHexString){
 		if (nHexString == null || nHexString.equals("")){
 			return new byte[0];
+		}
+
+		if (nHexString.indexOf(" ") > -1){ //含有空格则过滤
+			nHexString = nHexString.replaceAll(" ", "");
 		}
 
 		int nLen = nHexString.length();
@@ -61,7 +101,7 @@ public class LibHelper {
 	public static String RestoreHex(String nHexString, String charsetname){
 		String result;
 		try {
-			result = new String(RestoreHex(nHexString), charsetname);
+			result = new String(RestoreHexStr(nHexString), charsetname);
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "";
@@ -75,7 +115,7 @@ public class LibHelper {
 	 * @param nHexString 16进制字符串
 	 * @return
 	 */
-	public static String RestoreHexDefault(String nHexString){
+	public static String RestoreHex(String nHexString){
 		return RestoreHex(nHexString, DefaultCharsetName);
 	}
 }

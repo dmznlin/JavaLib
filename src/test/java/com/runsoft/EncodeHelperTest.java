@@ -96,7 +96,7 @@ public void testDecodeBase64NStr() throws Exception {
 @Test
 public void testEncodeMD5() throws Exception {
 //TODO: Test goes here...
-	String md5 = EncodeHelper.EncodeMD5("MD5信息摘要");
+	String md5 = EncodeMD5("MD5信息摘要", DefaultCharsetName);
 	System.out.println("MD5: " + md5);
 }
 

@@ -69,7 +69,7 @@ interface DateTimeFormatConfig {
     }
 }
 
-public class DateTimeHelper {
+public class DateTimeHelper extends LibraryBase {
     private static DateTimeHelper FHelper = null;
     private DateTimeFormatConfig FConfig = null;
 
@@ -313,7 +313,7 @@ public class DateTimeHelper {
         return FHelper.TickCount();
     }
 
-    enum TickDefault{
+    public enum TickDefault{
         tdZero,  //开始计时为0时,返回0
         tdNow   //开始计时为0时,返回当前计时
     }

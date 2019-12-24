@@ -3,7 +3,7 @@ package com.runsoft;
 import java.security.MessageDigest;
 import java.util.Base64;
 
-public class EncodeHelper {
+public class EncodeHelper extends LibraryBase {
 	/**
 	 * base64编码
 	 * @param nData 待编码数据
@@ -38,7 +38,7 @@ public class EncodeHelper {
 	 * @return
 	 */
 	public static String EncodeBase64(String nStr){
-		return EncodeBase64(nStr, LibHelper.DefaultCharsetName);
+		return EncodeBase64(nStr, DefaultCharsetName);
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class EncodeHelper {
 	 * @return
 	 */
 	public static String DecodeBase64(String nStr){
-		return DecodeBase64(nStr, LibHelper.DefaultCharsetName);
+		return DecodeBase64(nStr, DefaultCharsetName);
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class EncodeHelper {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			md.update(nData);
-			return LibHelper.ToHexString(md.digest());
+			return LibraryHelper.ToHexString(md.digest(), false, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
@@ -118,6 +118,6 @@ public class EncodeHelper {
 	 * @return
 	 */
 	public static String EncodeMD5(String nStr){
-		return EncodeMD5(nStr, LibHelper.DefaultCharsetName);
+		return EncodeMD5(nStr, DefaultCharsetName);
 	}
 }

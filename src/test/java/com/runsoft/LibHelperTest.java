@@ -39,9 +39,10 @@ public void testToHexStr() throws Exception {
 @Test
 public void testToBytes() throws Exception { 
 //TODO: Test goes here...
-	String hex = LibHelper.ToHexString("你好,我是中文".getBytes("GBK"));
+	String hex = LibraryHelper.ToHexString("你好,我是中文");
 	System.out.println("ToHexStr: " + hex);
-	System.out.println("HexToStr: " + LibHelper.RestoreHex(hex, "GBK"));
+	System.out.println("HexToStr: " + LibraryHelper.RestoreHex(hex));
+
 } 
 
 
